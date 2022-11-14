@@ -1,0 +1,13 @@
+*{
+background-color: #282c34;
+padding: 0;
+margin: 0;
+}
+header{
+  padding: 2.5vh 5vw;
+  font-size: 130%;
+  color: white;
+  font-family: Helvetica;
+  border-bottom: 0.5px black solid;
+}
+
