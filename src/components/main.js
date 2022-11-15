@@ -1,23 +1,34 @@
 import React, { useState,useEffect } from 'react';
 import './main.css'
-//import UserDelete from './form/form'
 import Register from './Register/register'
 
 function Main(){
-    /*
-     = {
-        all_users:[],
-        newUser:{id:0,name:'',email:'',lastname:''},
-        errorMsg:''
-    }*/
 
     const [name,setName] = useState('');
     const [lastName,setLastName] = useState('');
     const [email,setEmail] = useState('');
     const [errorMSg,setError] = useState('');
     const [allUsers,setAllUsers] = useState([]);
+    const [loadingMsg,setLoadingMsg] = useState(false);
 
-    const removeUser =  (id) =>{
+    useEffect( (e)=> {
+        fetch('https://reqres.in/api/users')
+        .then(res=>res.json())
+        .then(datas=>{
+            const users = datas.data.map(user => {
+                return {
+                    id:user.id,
+                    name:user.first_name,
+                    lastname:user.last_name,
+                    email:user.email
+                    }
+                })
+            setAllUsers(users.slice(0,2))
+            })
+        }
+    ,[] )
+
+    const removeUser = (id) =>{
 
         if(window.confirm('Are you sure you want to remove the user '+id)){
 
@@ -54,7 +65,22 @@ function Main(){
             setError('Input missing');
             return
         }
+
+        if(email.indexOf('@') === -1){
+            setError('Email address invalid. @ not found.');
+            return
+        }
+
+        for(let myUser of allUsers){
+            if (myUser.email === email){
+                setError('Email address already exists');
+                return
+            }
+        }
         
+        setLoadingMsg(true);
+        setError('');
+
         const user = {
             'name':name,
             'lastName':lastName,
@@ -71,31 +97,16 @@ function Main(){
             setName('')
             setLastName('')
             setEmail('')
+            setError('')
             setAllUsers([...allUsers,data])
+            setLoadingMsg(false);
             }
         )
     }
     
-    useEffect( (e)=> {
-        fetch('https://reqres.in/api/users')
-        .then(res=>res.json())
-        .then(datas=>{
-            const users = datas.data.map(user => {
-                return {
-                    id:user.id,
-                    name:user.first_name,
-                    lastname:user.last_name,
-                    email:user.email
-                    }
-                })
-            setAllUsers(users.slice(0,2))
-            })
-        }
-    ,[])
-    
     return(
     <div className='user'>
-        <Register value = {{'name':name,'lastName':lastName,'email':email}} inputChanged = {inputChanged} registerUser = {addUser} errorMsg = {errorMSg}/>
+        <Register value = {{'name':name,'lastName':lastName,'email':email}} inputChanged = {inputChanged} registerUser = {addUser} errorMsg = {errorMSg} loadingMsg={loadingMsg}/>
         {
             allUsers.map(user=>
                 <li key={user.id} className='user-data-father'>

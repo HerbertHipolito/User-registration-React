@@ -21,6 +21,7 @@ export default function register(props){
                     <input type='text' id="email" onChange={props.inputChanged} value={props.value.email} ></input>          
                 </div>                
             </div>
+            {props.loadingMsg?<p id="loading-msg">Listing the user</p>:null}
             <p id={props.errorMsg?'erroActive':''}>{props.errorMsg}</p>
             <button id='register-button' type='submit' onClick={props.registerUser}>Register</button>
         </div>
