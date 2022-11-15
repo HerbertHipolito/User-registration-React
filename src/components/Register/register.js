@@ -1,9 +1,7 @@
 import React from 'react';
 import './register.css'
-//import PropTypes from 'prop-types';
 
 export default function register(props){
-//{value,inputChanged,registerUser,errorMsg}
 
     return (
         <div id='register-div'>
@@ -15,7 +13,7 @@ export default function register(props){
                     </div>
                     <div>
                         <p>Last name</p>
-                        <input type='text' id="lastname" onChange={props.inputChanged} value={props.value.lastname} ></input>          
+                        <input type='text' id="lastname" onChange={props.inputChanged} value={props.value.lastName} ></input>          
                     </div>
                 </div>
                 <div id="register-inputs-line2">
