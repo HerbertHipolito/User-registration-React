@@ -3,11 +3,40 @@ background-color: #282c34;
 padding: 0;
 margin: 0;
 }
+
 header{
-  padding: 2.5vh 5vw;
   font-size: 130%;
-  color: white;
+  color: #dde3f0;
   font-family: Helvetica;
   border-bottom: 0.5px black solid;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
 }
 
+#App-header ul{
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: space-between;
+}
+
+#App-header ul ,#my-name-bro{
+  padding: 3vh 5vh
+}
+
+#App-header ul li a{
+  padding: 2vh;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
+#App-header ul li a:hover{
+  background-color: #1d1f25;
+}
+
+.link-name{
+  color: #dde3f0;
+  text-decoration: None;
+}

@@ -1,0 +1,19 @@
+#home-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5vh 5vw;
+    margin: 5vh 5vw;
+    font-size: 120%;
+    color: #dde3f0;
+}
+
+#home-page p {
+    margin-top: 5vh;
+}
+
+#api-link{
+    color: #dde3f0;
+    text-decoration: none;
+}

@@ -1,0 +1,24 @@
+footer{
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding: 2vh 0;
+    font-size: 115%;
+    border-top: 0.5px black solid;
+    color: #c9d5ed;
+    bottom: 0;
+  }
+  
+#homePage,#register{
+    bottom: 0;
+}
+
+#list{
+  position: fixed;
+}
+
+footer p a {
+  color: #c9d5ed; 
+}
+  

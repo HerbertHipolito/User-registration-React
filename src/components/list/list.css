@@ -1,21 +1,10 @@
-li{
-    color:white;
-    list-style: none;
-    text-align: left;
-    margin: 5vh
-}
-
-li p,.user-data{
-    background-color: #1d1f25;
-}
-
 .user-data{
     padding: 2.5vh 0;
     margin: 0 15vw;
     box-shadow: 0px 0px 2px #888;
 }
 
-li p {
+.user li p {
     font-size: 120%;
     padding:0.3vh 0;
     padding-left: 2vw;
@@ -23,7 +12,7 @@ li p {
 
 .delete-button{
     position: absolute;
-    color: white;
+    color: #dde3f0;
     border-radius: 80%;
     border: 0.5px solid black;
     padding:7px;
@@ -34,9 +23,22 @@ li p {
     
 }
 
+.user li{
+    color:#dde3f0;
+    list-style: none;
+    text-align: left;
+    margin: 5vh
+}
+
+.user li p,.user-data{
+    background-color: #1d1f25;
+}
+
 .form-group{
     display: flex;
     flex-direction: row;
     justify-content: right;
     margin-right: 3vw;
 }
+
+
