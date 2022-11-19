@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useRef} from 'react';
 import './register.css'
 import Footer from '../footer/footer';
 
@@ -6,14 +6,18 @@ export default function Register(props){
 
     const [errorMsg,setError] = useState('');
     const [loadingMsg,setLoadingMsg] = useState(false);
-    const [name,setName] = useState('');
-    const [lastName,setLastName] = useState('');
-    const [email,setEmail] = useState('');
+
+    const refName = useRef()
+    const refLastName = useRef()
+    const refEmail = useRef()
 
     const addUser = (event) =>{
     event.preventDefault()
 
-    if (name === '' || email === '' || lastName === ''){
+    //Basic input validation that checks whether the user completed all inputs, the email is available, and the email contains the @ character.
+    var [name,lastName,email] = [refName.current.value,refLastName.current.value,refEmail.current.value]
+
+    if (name=== '' || lastName === '' || email === ''){
         setError('Input missing');
         return
     }
@@ -29,63 +33,47 @@ export default function Register(props){
             return
         }
     }
-
+    
     setLoadingMsg(true);
     setError('');
 
     const user = {name,lastName,email}
-
+    
     fetch('https://reqres.in/api/users',{
         method:'POST',
         headers:{'Content-type':'application/json'},
         body:JSON.stringify(user)
     }).then(res =>res.json())
       .then(datas => {
-        setName('')
-        setLastName('')
-        setEmail('')
-        setError('')
         props.setAllUsers([...props.allUsers,datas])
         setLoadingMsg(false);
         alert('The user has been added');
         
         }
     )
+    
 }
-
-    const inputChanged = (e) =>{
-      
-        var newValue = null;
-        if (e.target.id === "name"){
-            newValue = setName(e.target.value)
-        }else if(e.target.id ==="email"){
-            newValue = setEmail(e.target.value)
-        }else{
-            newValue = setLastName(e.target.value) 
-        }
-        return newValue;
-    }
-  
 
     return (
         <>
         <div className='user'>
-            <form onSubmit={addUser}>
+        
+            <form onSubmit={addUser} >
             <div id='register-div'>
                 <div id='register-inputs'>
                     <div id="register-inputs-line1">
                         <div>
                             <p>Name</p>
-                            <input type='text' id="name" onChange={inputChanged} value={name} ></input>
+                            <input type='text' id="name"  ref={refName}  ></input>
                         </div>
                         <div>
                             <p>Last name</p>
-                            <input type='text' id="lastname" onChange={inputChanged} value={lastName} ></input>          
+                            <input type='text' id="lastname" ref={refLastName}  ></input>          
                         </div>
                     </div>
                     <div id="register-inputs-line2">
                         <p>Email</p>
-                        <input type='text' id="email" onChange={inputChanged} value={email} ></input>          
+                        <input type='text' id="email" ref={refEmail} ></input>          
                     </div>                
                 </div>
                 {loadingMsg?<p id="loading-msg">Listing the user</p>:null}
@@ -93,6 +81,7 @@ export default function Register(props){
                 <button id='register-button' type='submit' >Register</button>
             </div>
             </form>
+        
         </div>
         <Footer current_component = {'register'}/>
         </>
