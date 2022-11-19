@@ -1,0 +1,41 @@
+#user-data{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10vh;
+    color: white;
+}
+
+#user-data p,#user-data img{
+    margin-bottom: 5vh;
+}
+
+#user-title{
+    font-size: 320%;
+}
+
+#user-email{
+    font-size: 150%;
+}
+
+#user-data a{
+    text-decoration: none;
+    color:white;
+    font-size: 110%;
+    padding:1.5vh;
+    background-color: #1d1f25;
+    box-shadow: 0px 0px 10px black;
+    cursor: pointer;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+#user-data img{
+    width: 14vw;
+}
+
+#user-data a:hover{
+    background-color: #2b2f34;
+    color:rgb(215, 212, 212) ;
+}
