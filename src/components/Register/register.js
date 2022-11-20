@@ -1,21 +1,33 @@
-import React,{useState,useRef} from 'react';
+import React,{useState} from 'react';
 import './register.css'
 import Footer from '../footer/footer';
 
 export default function Register(props){
 
     const [errorMsg,setError] = useState('');
-    const [loadingMsg,setLoadingMsg] = useState(false);
 
-    const refName = useRef()
-    const refLastName = useRef()
-    const refEmail = useRef()
+    const [name,setName] = useState('')
+    const [lastName,setLastName] = useState('')
+    const [email,setEmail] = useState('')
+
+    const inputChanged = (e) =>{
+        
+        var newValue = null;
+
+        if (e.target.id === "name"){
+            newValue = setName(e.target.value)
+        }else if(e.target.id ==="email"){
+            newValue = setEmail(e.target.value)
+        }else{
+            newValue = setLastName(e.target.value) 
+        }
+        return newValue;
+    }
 
     const addUser = (event) =>{
     event.preventDefault()
 
-    //Basic input validation that checks whether the user completed all inputs, the email is available, and the email contains the @ character.
-    var [name,lastName,email] = [refName.current.value,refLastName.current.value,refEmail.current.value]
+    //Basic input validation that checks whether the user completed all inputs, the email is available.
 
     if (name=== '' || lastName === '' || email === ''){
         setError('Input missing');
@@ -26,31 +38,23 @@ export default function Register(props){
         setError('Email address invalid. @ not found.');
         return
     }
-
-    for(let myUser of props.allUsers){
-        if (myUser.email === email){
-            setError('Email address already exists');
-            return
-        }
-    }
     
-    setLoadingMsg(true);
     setError('');
 
     const user = {name,lastName,email}
     
-    fetch('https://reqres.in/api/users',{
+    fetch('http://localhost:3500/user/register',{
         method:'POST',
         headers:{'Content-type':'application/json'},
         body:JSON.stringify(user)
-    }).then(res =>res.json())
-      .then(datas => {
-        props.setAllUsers([...props.allUsers,datas])
-        setLoadingMsg(false);
-        alert('The user has been added');
-        
+    }).then(res=>{
+        if(res.ok){
+            setName('')
+            setLastName('')
+            setEmail('')
+            alert('The user has been added')
         }
-    )
+    })
     
 }
 
@@ -58,25 +62,24 @@ export default function Register(props){
         <>
         <div className='user'>
         
-            <form onSubmit={addUser} >
+            <form onSubmit={addUser} method="POST" action="/user/submit" >
             <div id='register-div'>
                 <div id='register-inputs'>
                     <div id="register-inputs-line1">
                         <div>
                             <p>Name</p>
-                            <input type='text' id="name"  ref={refName}  ></input>
+                            <input type='text' id="name"  onChange={inputChanged} value = {name} ></input>
                         </div>
                         <div>
                             <p>Last name</p>
-                            <input type='text' id="lastname" ref={refLastName}  ></input>          
+                            <input type='text' id="lastname" onChange={inputChanged} value = {lastName}  ></input>          
                         </div>
                     </div>
                     <div id="register-inputs-line2">
                         <p>Email</p>
-                        <input type='text' id="email" ref={refEmail} ></input>          
+                        <input type='text' id="email" onChange={inputChanged} value = {email} ></input>          
                     </div>                
                 </div>
-                {loadingMsg?<p id="loading-msg">Listing the user</p>:null}
                 <p id={errorMsg?'erroActive':''}>{errorMsg}</p>
                 <button id='register-button' type='submit' >Register</button>
             </div>

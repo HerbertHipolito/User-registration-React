@@ -3,40 +3,31 @@ import {useParams,Link} from 'react-router-dom';
 import Footer from '../footer/footer';
 import './userDetail.css';
 
-export default function UserDetail(props) {
+export default function UserDetail() {
 
     const {id} = useParams();
     const [user,setUser] = useState({});
     
     useEffect( ()=> {
-        fetch(`https://reqres.in/api/users/${id}`)
+        fetch(`http://localhost:3500/user/${id}`)
         .then(res=>res.json())
-        .then(datas=>{
-
-            if(datas.data){
+        .then(data=>{
+            if(data){
                 setUser({
-                    id:1*datas.data.id,
-                    name:datas.data.first_name,
-                    lastName:datas.data.last_name,
-                    email:datas.data.email,
-                    photo:datas.data.avatar
+                    id:data._id,
+                    name:data.name,
+                    lastName:data.lastName,
+                    email:data.email,
+                    photo:null
                 })
                 return     
             }
-            props.allUsers.forEach(element => {
-                if (element.id === id){
-                    setUser({
-                        id:element.id,
-                        name:element.name,
-                        lastName:element.lastName,
-                        email:element.email,
-                        photo:null
-                        })
-                    return 
-                    }
-                })
+            
             })
-        },[id,props.allUsers])
+        },[id]
+        
+        
+        )
 
     if(user.name !== undefined){
         return <>
