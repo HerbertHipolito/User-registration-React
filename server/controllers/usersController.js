@@ -1,14 +1,12 @@
-const path = require('path');
-const { EquirectangularReflectionMapping } = require('three');
 const users = require('../model/users');
 
 const listUsersController = async (req,res) =>{
 
     try{
         const userList = await users.find();
-        return res.json(userList);
+        return res.status(200).send({list:userList,'error':false});
     }catch(e){
-        return res.status(400).send({'error': e.message});
+        return res.status(400).send({'error': e});
     }
     
 }
@@ -19,7 +17,7 @@ const queryUserController = async (req,res) =>{
         if(!theUser) throw "User not found";
         return res.json(theUser)
     }catch(e){
-        return res.status(400).send({'error': e.message});
+        return res.status(400).send({'error': e});
     }
 
 }
@@ -32,11 +30,11 @@ const POSTregisterUserController = async (req,res) =>{
         if(!(req.body.name && req.body.name && req.body.email)) return res.status(406).send({error:'input missing'})
         const duplicateEmail = await users.find({email:req.body.email});
         if(duplicateEmail.length !== 0) return res.status(406).send({error: 'Duplicate email'});
-        const user = await users.create(req.body);
-        return res.status(201).send();
+        await users.create(req.body);
+        return res.status(201).send({error:false});
 
     }catch(e){
-        return res.status(400).send({error:'Something went wrong'})
+        return res.status(400).send({error:e})
     }
 
 }
@@ -44,9 +42,7 @@ const POSTregisterUserController = async (req,res) =>{
 const DELETEuserController = async (req,res) =>{
 
     try{
-        const result = await users.deleteOne({_id:req.params.id})
-        if(!result) throw "error during deletion";
-        //res.json({msg:'deu certo sdfj'});
+        await users.deleteOne({_id:req.params.id})
         return res.status(200).send();
     }catch(e){
         return res.status(404).send();

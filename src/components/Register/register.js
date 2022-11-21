@@ -47,12 +47,15 @@ export default function Register(props){
         method:'POST',
         headers:{'Content-type':'application/json'},
         body:JSON.stringify(user)
-    }).then(res=>{
-        if(res.ok){
+    }).then(res =>res.json())
+    .then(res=>{
+        if(!res?.error){
             setName('')
             setLastName('')
             setEmail('')
             alert('The user has been added')
+        }else{
+            setError(res.error);
         }
     })
     

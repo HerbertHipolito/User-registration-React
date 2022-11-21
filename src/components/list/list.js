@@ -29,7 +29,7 @@ function ListUsers(props){
             if(res.ok){
                 fetch('http://localhost:3500/user/list')
                 .then(res=>res.json())
-                .then(data=> retrieveUsers(data))
+                .then(data=>data.error?alert('data.error'):retrieveUsers(data.list))
             }
         })
     }}
@@ -37,12 +37,12 @@ function ListUsers(props){
   useEffect( (e)=> {
       fetch('http://localhost:3500/user/list')
       .then(res=>res.json())
-      .then(data=> retrieveUsers(data))
-    }
-   ,[])
+      .then(data=>data.error?alert('data.error'):retrieveUsers(data.list))
+            }
+        ,[])
 
     return (
-        <div className='user'>
+        <ul className='user'>
             {
             allUsers.map(user=>{
                 return( 
@@ -56,14 +56,16 @@ function ListUsers(props){
                         <p>Name: {user.name}</p>
                         <p>Last Name: {user.lastName}</p>
                         <p>Email: {user.email}</p>
-                        <p><Link to={`/user/${user.id}`}>More details</Link></p>
+                        <div className='button-details'>
+                        <p ><Link to={`/user/${user.id}`}>More details</Link></p>
+                        </div>
                     </div>
                 </li>)
                 }
             )
         }
         <Footer current_component={'list'}/>
-        </div>
+        </ul>
     )
 }
 

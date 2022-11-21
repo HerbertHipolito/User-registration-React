@@ -1,22 +1,27 @@
 .user-data{
     padding: 2.5vh 0;
-    margin: 0 15vw;
     box-shadow: 0px 0px 2px #888;
+    margin: 0 15vw;
 }
-
 .user li p {
     font-size: 120%;
     padding:0.3vh 0;
     padding-left: 2vw;
 }
-
 .user li p a{
     text-decoration: none;
     color: white;
     background-color: #2b2c2f;
-    padding:0.4vh;
-    box-shadow: 0px 0px 2px #6282e3;
-    margin: 2vh;
+    padding:0.6vh;
+    box-shadow: 0px 0px 2px #8ea5e9;
+}
+.button-details{
+    margin: 2vh 0;
+}
+
+.more-information{
+    box-shadow:0px 2px 2px #888;
+    margin: 0 15vw;
 }
 
 .user li p a:hover{
@@ -41,8 +46,9 @@
 .user li{
     color:#dde3f0;
     list-style: none;
-    text-align: left;
-    margin: 5vh
+    margin: 5vh;
+    display:flex;
+    flex-direction: column;
 }
 
 .user li p,.user-data{
