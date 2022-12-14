@@ -65,7 +65,7 @@ export default function Register(props){
         <>
         <div className='user'>
         
-            <form onSubmit={addUser} method="POST" action="/user/submit" >
+            <form onSubmit={addUser} method="POST" >
             <div id='register-div'>
                 <div id='register-inputs'>
                     <div id="register-inputs-line1">
