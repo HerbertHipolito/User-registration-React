@@ -9,7 +9,7 @@ export default function UserDetail() {
     const [user,setUser] = useState({});
     
     useEffect( ()=> {
-        fetch(`http://localhost:3500/user/${id}`)
+        fetch(`http://localhost:5975/user/${id}`)
         .then(res=>res.json())
         .then(data=>{
             if(data){
