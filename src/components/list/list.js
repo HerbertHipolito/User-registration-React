@@ -23,11 +23,11 @@ function ListUsers(props){
   const removeUser = (id) =>{
 
     if(window.confirm('Are you sure you want to remove the user '+id)){
-        fetch(`http://localhost:5975/user/delete/${id}`,{
+        fetch(`http://localhost:7699/user/delete/${id}`,{
             method: 'DELETE'
         }).then(res=>{
             if(res.ok){
-                fetch('http://localhost:5975/user/list')
+                fetch('http://localhost:7699/user/list')
                 .then(res=>res.json())
                 .then(data=>data.error?alert('data.error'):retrieveUsers(data.list))
             }
@@ -35,7 +35,7 @@ function ListUsers(props){
     }}
 
   useEffect( (e)=> {
-      fetch('http://localhost:5975/user/list')
+      fetch('http://localhost:7699/user/list')
       .then(res=>res.json())
       .then(data=>data.error?alert('data.error'):retrieveUsers(data.list))
             }
