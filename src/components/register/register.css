@@ -1,0 +1,80 @@
+#register-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding:8vh;
+    padding-bottom: 5vh;
+    align-items: center;
+}
+
+#register-inputs input{
+    color: white;
+    padding: 10px;
+    padding-bottom: 4px;
+    font-size: 110%;
+    border: 1px solid black;
+    margin: 0 5vw;
+    box-shadow: 0px 0px 5px black;
+    background-color: #323642;
+}
+
+#register-inputs p{
+text-align: center;
+margin-bottom: 2vh;
+font-size: 125%;
+color:#dde3f0;
+}
+
+#register-inputs-line1{
+    display: flex;
+    flex-direction: row;
+}
+
+#register-inputs-line2 p{
+    margin-top: 2vh;
+}
+
+#register-inputs-line2 input{
+    min-width: 40vw;
+}
+
+#register-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 15vw;
+}
+
+#register-div button{
+    font-size: 110%;
+    min-width: 16vw;
+    padding: 1vh;
+    cursor:pointer;
+    background-color: #1d1f25;
+    color:#dde3f0;
+    transition-timing-function: ease;
+    transition-duration: 0.3s;
+    box-shadow: 0px 1px 9px black;
+}
+
+#register-div button:hover{
+    background-color: #161618;
+}
+
+#loading-msg{
+    padding: 0.7vh;
+    margin-bottom:3vh;
+    background-color: rgb(42, 178, 133);
+    color: #dde3f0;
+    font-size: 110%;
+    box-shadow: 0px 1px 12px rgb(32, 156, 114);
+}
+
+#erroActive{
+    background-color: rgb(225, 50, 50);
+    padding: 0.8vh 1vh;
+    font-size: 120%;
+    margin-bottom: 4vh;
+    box-shadow: 0px 1px 12px red;
+    color: #dde3f0;
+}
