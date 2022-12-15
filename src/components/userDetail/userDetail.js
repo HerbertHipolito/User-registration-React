@@ -9,7 +9,7 @@ export default function UserDetail() {
     const [user,setUser] = useState({});
     
     useEffect( ()=> {
-        fetch(`http://localhost:7699/user/${id}`)
+        fetch(`${process.env.LOCAL_HOST}/user/${id}`)
         .then(res=>res.json())
         .then(data=>{
             if(data){

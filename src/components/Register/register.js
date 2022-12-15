@@ -43,7 +43,7 @@ export default function Register(props){
 
     const user = {name,lastName,email}
     
-    fetch('http://localhost:7699/user/register',{
+    fetch(`${process.env.LOCAL_HOST}/user/register`,{
         method:'POST',
         headers:{'Content-type':'application/json'},
         body:JSON.stringify(user)
